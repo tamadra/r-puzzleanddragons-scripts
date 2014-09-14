@@ -54,13 +54,15 @@ def updateDecendsSticky():
         try:
             #Check Date
             if str(cells[0].text) == now.strftime('%m/%d 00:00\n').lstrip("0"):
+                print "Found a dungeon that starts today..."
                 for decend in decends:
                     #Check Decends
-                    if cells[2].find('a', title=decend[0]) != None:
+                    if cells[2].find('a', title=decend[0]) != None or cells[2].find('a', title=decend[0][:-1]) != None:
                         title = str(now.strftime('%m/%d').lstrip("0")) + " - " + decend[0] + " Discussion Thread"
                         #Post new sticky
                         post = r.submit(pad, title, text=decend[1])
                         post.sticky()
+                        print "Posted " + str(decend[0])
         except:
             #exception required because of the table header
             pass
