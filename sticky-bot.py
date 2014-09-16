@@ -87,7 +87,7 @@ def main():
     END_TAG = '> [](#s1_)';
     r = praw.Reddit(user_agent='/r/PuzzleAndDragons Sidebar Updater')
     r.config.decode_html_entities = True
-    r.login('_moderators', 'omgpuzzles!')
+    r.login('_moderators', 'password')
     updateSidebarSticky()
     #updateDescendsSticky()
 
