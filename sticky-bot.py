@@ -89,7 +89,7 @@ def main():
     r.config.decode_html_entities = True
     r.login('_moderators', 'password')
     updateSidebarSticky()
-    #updateDescendsSticky()
+    updateDescendsSticky()
 
 
 if __name__ == '__main__':
