@@ -2,7 +2,7 @@ import praw
 import requests
 import bs4
 from datetime import datetime, timedelta
-from decends import decends
+from descends import descends
 
 #Date suffix
 def ord(n):
@@ -25,24 +25,34 @@ def updateSidebarSticky():
             print "Not Found"
 
         else:
-            previous_submission_id = stickytext[idx3+len('/comments/'):].split('/')[0]     
+            previous_submission_id = stickytext[idx3+len('/comments/'):].split('/')[0]
             submission = r.get_submission(submission_id = previous_submission_id)            
             previous_time = datetime.fromtimestamp(submission.created_utc)
             now_time = datetime.now()
             hours_ago = (now_time - previous_time).days * 24 + (now_time - previous_time).seconds/3600
-            if (hours_ago >= 25):
+            if (hours_ago >= 60):
+                print "Creating new post"
                 future_date = now_time + timedelta(days=3)
                 title = 'General Help & Discussion Thread.  '+now_time.strftime('%b')+" "+ord(now_time.day)+" - "+future_date.strftime('%b')+" "+ord(future_date.day)
                 submit_result = r.submit(pad, title, text="###Post your questions or box help requests in this thread\n\n* Please use PadHerder to show your monster box.\n* Be specific with your questions so people have a better understanding of your needs.\n* Show some love for the people who took time to respond to your question; upvote any responses that were helpful.\n\nPrevious thread [here]("+submission.permalink+")")
-                new_sidebar = current_sidebar[0:start_idx] + "\n> ## ["+title+"]("+submit_result.permalink+"?sort=new#icon-exclamation-red)  **Individual posts will be removed. Please use this thread instead.**\n" + current_sidebar[idx2:]         
+                new_sidebar = current_sidebar[0:start_idx] + "\n> ## ["+title+"]("+submit_result.permalink+"?sort=new#icon-exclamation-red)  **0 Questions**\n" + current_sidebar[idx2:]         
                 pad.update_settings(description=new_sidebar)
                 print "New post created: "+submit_result.permalink
 
             else:
-                print "Skipping. Less than 3 days"
+                print "Less than 3 days"
+                submission.replace_more_comments(limit=None, threshold=0)
+                num_unanswered = num_replies = 0
+                for question in submission.comments:
+                    replies = praw.helpers.flatten_tree(question.replies)
+                    num_replies += len(replies)
+                    if len(replies) == 0:
+                        num_unanswered += 1
+                new_sidebar = current_sidebar[0:start_idx] + "\n> ## ["+submission.title+"]("+submission.permalink+"?sort=new#icon-exclamation-red)  **"+str(len(submission.comments))+" Questions** ("+str(num_unanswered)+" unanswered) **"+str(num_replies)+" Replies**\n" + current_sidebar[idx2:]         
+                pad.update_settings(description=new_sidebar)
 
-#Updates the Decends Sticky
-def updateDecendsSticky():
+#Updates the Descends Sticky
+def updateDescendsSticky():
     pad = r.get_subreddit("puzzleanddragons")
     now = datetime.now()
     #Grab current PADwiki schedule
@@ -55,17 +65,18 @@ def updateDecendsSticky():
             #Check Date
             if str(cells[0].text) == now.strftime('%m/%d 00:00\n').lstrip("0"):
                 print "Found a dungeon that starts today..."
-                for decend in decends:
-                    #Check Decends
-                    if cells[2].find('a', title=decend[0]) != None or cells[2].find('a', title=decend[0][:-1]) != None:
-                        title = str(now.strftime('%m/%d').lstrip("0")) + " - " + decend[0] + " Discussion Thread"
+                for descend in descends:
+                    #Check Descends
+                    if cells[2].find('a', title=descend[0]) != None or cells[2].find('a', title=descend[0][:-1]) != None:
+                        title = str(now.strftime('%m/%d').lstrip("0")) + " - " + descend[0] + " Discussion Thread"
                         #Post new sticky
-                        post = r.submit(pad, title, text=decend[1])
+                        post = r.submit(pad, title, text=descend[1])
                         post.sticky()
-                        print "Posted " + str(decend[0])
+                        print "Posted " + str(descend[0])
         except:
             #exception required because of the table header
             pass
+
 
 #Kick off main function
 def main():
@@ -76,9 +87,9 @@ def main():
     END_TAG = '> [](#s1_)';
     r = praw.Reddit(user_agent='/r/PuzzleAndDragons Sidebar Updater')
     r.config.decode_html_entities = True
-    r.login('username', 'password')
+    r.login('_moderators', 'omgpuzzles!')
     updateSidebarSticky()
-    updateDecendsSticky()
+    #updateDescendsSticky()
 
 
 if __name__ == '__main__':

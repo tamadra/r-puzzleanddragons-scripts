@@ -4,7 +4,8 @@
 ### Sidebar Sticky Bot
 ==============
 
-Simple script that checks if the "fake sticky" post is older than 3 days. If so, creates a new post & updates the fake sticky link to it. It also checks the PAD wiki for daily decends, creates the thread and stickies it.
+Simple script that checks if the "fake sticky" post is older than 3 days. If so, creates a new post & updates the fake sticky link to it. 
+It also checks the PAD wiki for daily descends, creates the thread and stickies it.
 
 
 ##### Setup
