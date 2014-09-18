@@ -30,7 +30,7 @@ def updateSidebarSticky():
             previous_time = datetime.fromtimestamp(submission.created_utc)
             now_time = datetime.now()
             hours_ago = (now_time - previous_time).days * 24 + (now_time - previous_time).seconds/3600
-            if (hours_ago >= 60):
+            if (hours_ago >= 65):
                 print "Creating new post"
                 future_date = now_time + timedelta(days=3)
                 title = 'General Help & Discussion Thread.  '+now_time.strftime('%b')+" "+ord(now_time.day)+" - "+future_date.strftime('%b')+" "+ord(future_date.day)
