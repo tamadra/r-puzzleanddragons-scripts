@@ -63,7 +63,7 @@ def updateDescendsSticky():
         cells = row.find_all("td")
         try:
             #Check Date
-            if str(cells[0].text) == now.strftime('%m/%d 00:00\n').lstrip("0"):
+            if str(cells[0].text) == now.strftime('%m/%d 00:00\n').lstrip("0").replace('/0','/'):
                 print "Found a dungeon that starts today..."
                 for descend in descends:
                     #Check Descends
