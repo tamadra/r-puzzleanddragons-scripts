@@ -464,7 +464,51 @@ Hera, Griffin, Highlander, Berserk.
 ],
 ['Satan Descended!',
 """
-Use this thread to discuss strategies, team building, or anything else for Satan Descended!
+[Satan Descended](http://puzzledragonx.com/en/mission.asp?m=441)
+
+1 Difficulty level
+
+**Floors:** 6
+
+**Binds:** None
+
+**Preemptive Strikes:** Fl6, 6005 damage
+
+**Preemptive Shields:** None
+
+**Multihits:** Fl1, 2, 4, 6
+
+**Biggest hit:**Fl5 144000
+
+**Descends Difficulty Rating:** Hard
+
+**Possible Teams:**
+
+*Kirin
+
+*Ra
+
+*Valk
+
+*U&Y
+
+*Goemon
+
+*Robin
+
+**Boss drop uses**
+
+[Satan](http://puzzledragonx.com/en/monster.asp?n=646) Unconditional 12.25x devil lead and a sub for 0 RCV teams.
+
+**Noteable drops**
+
+[Lilith](http://www.puzzledragonx.com/en/monster.asp?n=205) The dark healer girl. Useful for her poison and her evo'd form also provides a spike for devil teams.
+
+[Vampire](http://puzzledragonx.com/en/monster.asp?n=110) Dark Heart breaker, Mono Dark Lead
+
+[Kraken](http://puzzledragonx.com/en/monster.asp?n=400) Water, Attacker, Blue orb Enhance active skill.  Used in some Mono Blue teams
+
+[Cerberus](http://puzzledragonx.com/en/monster.asp?n=406) Dark, Attacker, Dark orb enhance active skill.   Used in Dtron teams and Satan teams.
 """
 ],
 ['Hera-Is Descended!',
